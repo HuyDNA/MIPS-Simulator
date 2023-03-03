@@ -2,8 +2,8 @@
 #define _MEMORY_DUMP_VISITOR_MIPS_SIMULATOR_
 
 #include "visual_class_macros.h"
-#include "Register.h"
-#include "RAM.h"
+#include "../HardwareComponents/Register.h"
+#include "../HardwareComponents/RAM.h"
 
 #include <string>
 
