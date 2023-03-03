@@ -2,7 +2,7 @@
 #define _CONTIGUOUS_MEMORY_HARDWARE_MIPS_SIMULATOR_
 
 #include "../visual_class_macros.h"
-#include "MemoryDumpVisitor.h"
+#include "../Visitors/MemoryDumpVisitor.h"
 
 #include <cstddef>
 #include <cstdin>
