@@ -3,7 +3,7 @@
 
 #include "../visual_class_macros.h"
 #include "ContiguousMemoryHardware.h"
-#include "MemoryDumperVisitor.h"
+#include "../Visitors/MemoryDumpVisitor.h"
 
 #include <cstddef>
 #include <cstdint>
