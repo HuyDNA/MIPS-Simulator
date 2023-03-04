@@ -2,7 +2,6 @@
 #define _CONTIGUOUS_MEMORY_HARDWARE_MIPS_SIMULATOR_
 
 #include "../visual_class_macros.h"
-#include "../Visitors/MemoryDumpVisitor.h"
 
 #include <cstddef>
 #include <cstdin>
@@ -18,7 +17,6 @@ Interface ContiguousMemoryHardware {
 
         virtual byte get(const address_t) const = 0;
         virtual void set(const address_t, const byte) = 0;
-        virtual string acceptDumper(const MemoryDumpVisitor&) const = 0;
 };
 
 #endif

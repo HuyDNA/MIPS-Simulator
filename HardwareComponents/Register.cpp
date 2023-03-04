@@ -29,7 +29,3 @@ virtual byte Register::get(const address_t address) const override {
 virtual void Register::set(const address_t address, const byte value) override {
     byteArray[address] = value;
 }
-
-virtual string Register::acceptDumper(const MemoryDumperVisitor& visitor) const override {
-    visitor.visit(*this);
-}

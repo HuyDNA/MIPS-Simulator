@@ -1,5 +1,4 @@
 #include "../visual_class_macros.h"
-#include "../Visitors/MemoryDumpVisitor.h"
 
 #include <cstddef>
 #include <cstdint>
@@ -27,8 +26,4 @@ virtual byte RAM::get(const address_t address) const override {
 
 virtual void RAM::set(const address_t address, const byte value) override {
     byteArray[address] = value;
-}
-
-virtual string RAM::acceptDumper(const MemoryDumperVisitor& visitor) const override {
-    vistor.visit(*this);
 }
