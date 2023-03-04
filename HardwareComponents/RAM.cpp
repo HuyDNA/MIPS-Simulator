@@ -11,7 +11,7 @@ using address_t = std::uint_fast32_t;
 
 RAM::RAM() {
     for (Byte& RAMCell : byteArray)
-        RAMCell = 0;
+        RAMCell = Byte(0);
 }
 
 RAM::RAM(const RAM& otherRAM) {
@@ -19,12 +19,12 @@ RAM::RAM(const RAM& otherRAM) {
         byteArray[address] = otherRAM.byteArray[address];
 }
 
-virtual RAM::~RAM() override = default;
+RAM::~RAM() = default;
 
-virtual Byte RAM::get(const address_t address) const override {
+Byte RAM::get(const address_t address) const {
     return byteArray[address];
 }
 
-virtual void RAM::set(const address_t address, const Byte value) override {
+void RAM::set(const address_t address, const Byte value) {
     byteArray[address] = value;
 }
