@@ -1,6 +1,5 @@
 #include "../visual_class_macros.h"
 #include "ContiguousMemoryHardware.h"
-#include "../Visitors/MemoryDumpVisitor.h"
 #include "Register.h"
 
 #include <cstdint>
