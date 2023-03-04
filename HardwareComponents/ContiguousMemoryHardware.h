@@ -3,7 +3,7 @@
 
 #include "../visual_class_macros.h"
 
-#include <cstdin>
+#include <cstdint>
 #include <string>
 
 using std::string;
