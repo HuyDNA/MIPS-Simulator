@@ -3,6 +3,10 @@
 
 #include "../visual_class_macros.h"
 #include "ContiguousMemoryHardware.h"
+#include "Register.h"
+#include "../MemoryUnitStructs/Byte.h"
+#include "../MemoryUnitStructs/Word.h"
+
 
 #include <cstdint>
 #include <string>
@@ -20,7 +24,7 @@ Class Register {
         Register(const Register&);
         virtual ~Register() override;
 
-        virtual byte get(const address_t) const override;
+        virtual Byte get(const address_t) const override;
         virtual void set(const address_t, const Byte) override;
         string getHexaRepresentation() const;
 };

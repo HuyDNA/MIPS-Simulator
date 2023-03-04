@@ -1,5 +1,7 @@
 #include "../visual_class_macros.h"
 #include "RAM.h"
+#include "../MemoryUnitStructs/Byte.h"
+#include "../MemoryUnitStructs/Word.h"
 
 #include <cstdint>
 #include <string>

@@ -1,6 +1,8 @@
 #include "../visual_class_macros.h"
 #include "ContiguousMemoryHardware.h"
 #include "Register.h"
+#include "../MemoryUnitStructs/Byte.h"
+#include "../MemoryUnitStructs/Word.h"
 
 #include <cstdint>
 #include <string>

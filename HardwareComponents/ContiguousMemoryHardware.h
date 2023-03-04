@@ -2,6 +2,8 @@
 #define _CONTIGUOUS_MEMORY_HARDWARE_MIPS_SIMULATOR_
 
 #include "../visual_class_macros.h"
+#include "../MemoryUnitStructs/Byte.h"
+#include "../MemoryUnitStructs/Word.h"
 
 #include <cstdint>
 #include <string>
