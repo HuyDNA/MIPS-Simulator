@@ -2,6 +2,7 @@
 #include "RAM.h"
 #include "../MemoryUnitStructs/Byte.h"
 #include "../MemoryUnitStructs/Word.h"
+#include "../UtilityClasses/MemoryDumper.h"
 
 #include <cstdint>
 #include <string>
@@ -27,4 +28,12 @@ Byte RAM::get(const address_t address) const {
 
 void RAM::set(const address_t address, const Byte value) {
     byteArray[address] = value;
+}
+
+string RAM::getHexaRepresentationOfWordAtByteAddress(const address_t address) const {
+    return MemoryDumper::dumpWordInHexa(getRAMWordAtByteAddress(address));
+}
+
+Word RAM::getRAMWordAtByteAddress(const address_t address) const {
+    return {byteArray[address], byteArray[address + 1], byteArray[address + 2], byteArray[address + 3]};
 }

@@ -27,7 +27,9 @@ Class RAM {
         virtual Byte get(const address_t) const override;
         virtual void set(const address_t, const Byte) override;
 
-        string getHexaRepresentationOfWord(const address_t) const;
+        string getHexaRepresentationOfWordAtByteAddress(const address_t) const;
+    private:
+        Word getRAMWordAtByteAddress(const address_t) const;
 };
 
 #endif
