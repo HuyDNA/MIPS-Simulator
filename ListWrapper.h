@@ -1,21 +1,26 @@
 #ifndef LIST_WRAPPER_MIPS_SIMULATOR
 #define LIST_WRAPPER_MIPS_SIMULATOR
 
-#include <queue>
+#include <vector>
 
-using std::deque;
+using std::vector;
 
 template<class T>
 Class ListWrapper {
 private:
-    deque<T> list;
+    vector<T> list;
 public:
     void pushBack(const T& item) {
         list.push_back(item);
     }
 
     void pushFront(const T& item) {
-        list.push_front(item);
+        list.push_back(item);
+        for (int i = list.size() - 1; i > 0; --i)
+        {
+            list[i] = list[i - 1];
+        }
+        list[0] = item;
     }
 
     void popBack() {
@@ -23,7 +28,11 @@ public:
     }
 
     void popFront() {
-        list.pop_front();
+        for (int i = 0; i < list.size() - 1; ++i)
+        {
+            list[i] = list[i + 1];
+        }
+        list.pop_back();
     }
 
     int getSize() const {
@@ -34,11 +43,11 @@ public:
         return list.empty();
     }
 
-    ListWrapper() : list(deque<T>{}) {
+    ListWrapper() : list(vector<T>{}) {
         
     }
 
-    ListWrapper<T>(const ListWrapper<T> &wrapper) : list(deque<T>(wrapper.list)) {
+    ListWrapper<T>(const ListWrapper<T> &wrapper) : list(vector<T>(wrapper.list)) {
 
     }
 
