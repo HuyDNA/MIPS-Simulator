@@ -1,15 +1,14 @@
 #include "../visual_class_macros.h"
+#include "RAM.h"
 
-#include <cstddef>
 #include <cstdint>
 #include <string>
 
-using std::byte;
 using std::string;
 using address_t = std::uint_fast32_t;
 
 RAM::RAM() {
-    for (byte& RAMCell : byteArray)
+    for (Byte& RAMCell : byteArray)
         RAMCell = 0;
 }
 
@@ -20,10 +19,10 @@ RAM::RAM(const RAM& otherRAM) {
 
 virtual RAM::~RAM() override = default;
 
-virtual byte RAM::get(const address_t address) const override {
+virtual Byte RAM::get(const address_t address) const override {
     return byteArray[address];
 }
 
-virtual void RAM::set(const address_t address, const byte value) override {
+virtual void RAM::set(const address_t address, const Byte value) override {
     byteArray[address] = value;
 }

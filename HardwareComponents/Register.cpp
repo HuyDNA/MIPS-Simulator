@@ -1,17 +1,16 @@
 #include "../visual_class_macros.h"
 #include "ContiguousMemoryHardware.h"
 #include "../Visitors/MemoryDumpVisitor.h"
+#include "Register.h"
 
-#include <cstddef>
 #include <cstdint>
 #include <string>
 
-using std::byte;
 using std::string;
 using address_t = std::uint_fast32_t;
 
 Register::Register() {
-    for (byte& registerCell : byteArray)
+    for (Byte& registerCell : byteArray)
         registerCell = 0;
 }
 
@@ -22,10 +21,10 @@ Register::Register(const Register& otherRegister) {
 
 virtual Register::~Register() override = default;
 
-virtual byte Register::get(const address_t address) const override {
+virtual Byte Register::get(const address_t address) const override {
     return byteArray[address];
 }
 
-virtual void Register::set(const address_t address, const byte value) override {
+virtual void Register::set(const address_t address, const Byte value) override {
     byteArray[address] = value;
 }
