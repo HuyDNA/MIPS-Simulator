@@ -15,7 +15,7 @@ Class RegisterFile {
     public:
         static constexpr int NUMBER_OF_REGISTERS = 32;
     private:
-        Register registerArray[NUMBER_OF_REGISTERS];
+        array<Register, NUMBER_OF_REGISTERS> registerArray;
     public:
         RegisterFile();
         RegisterFile(const RegisterFile&);
