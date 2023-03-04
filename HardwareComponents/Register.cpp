@@ -3,6 +3,7 @@
 #include "Register.h"
 #include "../MemoryUnitStructs/Byte.h"
 #include "../MemoryUnitStructs/Word.h"
+#include "../UtilityClasses/MemoryDumper.h"
 
 #include <cstdint>
 #include <string>
@@ -28,4 +29,12 @@ Byte Register::get(const address_t address) const {
 
 void Register::set(const address_t address, const Byte value) {
     byteArray[address] = value;
+}
+
+string Register::getHexaRepresentation() const {
+    return MemoryDumper::dumpWordInHexa(getRegisterAsWord());
+}
+
+Word Register::getRegisterAsWord() const {
+    return {byteArray[0], byteArray[1], byteArray[2], byteArray[3]};
 }

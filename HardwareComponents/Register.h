@@ -28,6 +28,8 @@ Class Register {
         virtual Byte get(const address_t) const override;
         virtual void set(const address_t, const Byte) override;
         string getHexaRepresentation() const;
+    private:
+        Word getRegisterAsWord() const;
 };
 
 #endif
