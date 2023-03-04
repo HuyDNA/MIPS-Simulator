@@ -12,7 +12,7 @@ using address_t = std::uint_fast32_t;
 
 Register::Register() {
     for (Byte& registerCell : byteArray)
-        registerCell = 0;
+        registerCell = Byte(0);
 }
 
 Register::Register(const Register& otherRegister) {
@@ -20,12 +20,12 @@ Register::Register(const Register& otherRegister) {
         byteArray[address] = otherRegister.byteArray[address];
 }
 
-virtual Register::~Register() override = default;
+Register::~Register() = default;
 
-virtual Byte Register::get(const address_t address) const override {
+Byte Register::get(const address_t address) const {
     return byteArray[address];
 }
 
-virtual void Register::set(const address_t address, const Byte value) override {
+void Register::set(const address_t address, const Byte value) {
     byteArray[address] = value;
 }
