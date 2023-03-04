@@ -1,5 +1,6 @@
 #include "../visual_class_macros.h"
 #include "Register.h"
+#include "RegisterFile.h"
 
 #include <cstdint>
 #include <string>
