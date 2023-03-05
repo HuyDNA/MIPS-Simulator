@@ -11,11 +11,11 @@ Class ListWrapper {
 private:
     vector<T> list;
 public:
-    void pushBack(const T& item) {
+    virtual void pushBack(const T& item) {
         list.push_back(item);
     }
 
-    void pushFront(const T& item) {
+    virtual void pushFront(const T& item) {
         list.push_back(item);
         for (int i = list.size() - 1; i > 0; --i)
         {
@@ -48,13 +48,16 @@ public:
         
     }
 
-    ListWrapper<T>(const ListWrapper<T> &wrapper) : list(vector<T>(wrapper.list)) {
+    ListWrapper<T>(const ListWrapper<T> &wrapper) : list(wrapper.list) {
 
     }
 
-    ListWrapper<T>(ListWrapper<T> &&wrapper) noexcept : list(wrapper.list) {
+    ListWrapper<T>(ListWrapper<T> &&wrapper) noexcept : list(std::move(wrapper.list)) {
         
     }
+
+    ListWrapper<T>& operator=(const ListWrapper &wrapper) = delete;
+    ListWrapper<T>& operator=(ListWrapper<T> &&wrapper) = delete;
 
     auto cbegin() const {
         return list.cbegin();
@@ -72,11 +75,11 @@ public:
         return list.end();
     }
 
-    const T& operator[] (int id) const {
+    virtual const T& operator[] (int id) const {
         return list.at(id);
     }
 
-    T& operator[] (int id) {
+    virtual T& operator[] (int id) {
         return list.at(id);
     }
 };
