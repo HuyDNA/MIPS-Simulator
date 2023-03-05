@@ -11,11 +11,11 @@ Class ListWrapper {
 private:
     vector<T> list;
 public:
-    void pushBack(const T& item) {
+    virtual void pushBack(const T& item) {
         list.push_back(item);
     }
 
-    void pushFront(const T& item) {
+    virtual void pushFront(const T& item) {
         list.push_back(item);
         for (int i = list.size() - 1; i > 0; --i)
         {
