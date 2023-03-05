@@ -1,6 +1,7 @@
 #ifndef TABLE_WRAPPER_MIPS_SIMULATOR
 #define TABLE_WRAPPER_MIPS_SIMULATOR
 
+#include "../visual_class_macros.h"
 #include <map>
 
 using std::map;
@@ -11,7 +12,7 @@ private:
     map<K,T> table;
 public:
     void set(const K &key, const T &value) {
-        table.at(key) = value;
+        table[key] = value;
     }
 
     const T& get(const K &key) const {
@@ -50,16 +51,19 @@ public:
 
     }
 
-    TableWrapper(const TableWrapper &tableWrapper) : table(map<K,T>(tableWrapper.table)) {
+    TableWrapper(const TableWrapper &tableWrapper) : table(tableWrapper.table) {
 
     }
 
-    TableWrapper(TableWrapper &&tableWrapper) : table(tableWrapper.table) {
+    TableWrapper(TableWrapper &&tableWrapper) : table(std::move(tableWrapper.table)) {
 
     }
 
-    int count() const {
-        return table.count();
+    TableWrapper& operator=(const TableWrapper &tableWrapper) = delete;
+    TableWrapper& operator=(TableWrapper &&tableWrapper) = delete;
+
+    int count(const K& key) const {
+        return table.count(key);
     }
 
     void erase(const K& key) {
