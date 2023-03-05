@@ -48,13 +48,16 @@ public:
         
     }
 
-    ListWrapper<T>(const ListWrapper<T> &wrapper) : list(vector<T>(wrapper.list)) {
+    ListWrapper<T>(const ListWrapper<T> &wrapper) : list(wrapper.list) {
 
     }
 
-    ListWrapper<T>(ListWrapper<T> &&wrapper) noexcept : list(wrapper.list) {
+    ListWrapper<T>(ListWrapper<T> &&wrapper) noexcept : list(std::move(wrapper.list)) {
         
     }
+
+    ListWrapper<T>& operator=(const ListWrapper &wrapper) = delete;
+    ListWrapper<T>& operator=(ListWrapper<T> &&wrapper) = delete;
 
     auto cbegin() const {
         return list.cbegin();
