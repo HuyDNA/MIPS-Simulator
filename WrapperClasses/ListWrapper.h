@@ -79,7 +79,7 @@ public:
         return list.at(id);
     }
 
-    T& operator[] (int id) {
+    virtual T& operator[] (int id) {
         return list.at(id);
     }
 };
