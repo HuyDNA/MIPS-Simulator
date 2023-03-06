@@ -8,34 +8,42 @@
 using std::vector;
 
 template<class T>
-Class BoundedListWrapepr : public ListWrapper<T>{
+Class BoundedListWrapper : public ListWrapper<T>{
 private:
-    const int CAPACITY;
+    const int capacity;
 public:
-    BoundedListWrapepr(int capacity = 0) : ListWrapper<T>(), CAPACITY(capacity) {
+    BoundedListWrapper(int capacity = 0) : ListWrapper<T>(), capacity(capacity) {
         
     }
 
-    BoundedListWrapepr<T>(const BoundedListWrapepr<T> &wrapper) : ListWrapper<T>(wrapper), CAPACITY(wrapper.CAPACITY) {
+    BoundedListWrapper<T>(const BoundedListWrapper<T> &wrapper) : ListWrapper<T>(wrapper), capacity(wrapper.capacity) {
 
     }
 
-    BoundedListWrapepr<T>(BoundedListWrapepr<T> &&wrapper) noexcept : ListWrapper<T>(wrapper), CAPACITY(wrapper.CAPACITY) {
+    BoundedListWrapper<T>(BoundedListWrapper<T> &&wrapper) noexcept : ListWrapper<T>(wrapper), capacity(wrapper.capacity) {
         
     }
 
     void pushBack(const T &item) override
     {
-        if (this->getSize() == CAPACITY)
+        if (this->getSize() == capacity)
             throw std::length_error("Size of bounded list exceeds capacity");
         ListWrapper<T>::pushBack(item);
     }
 
     void pushFront(const T &item) override
     {
-        if (this->getSize() == CAPACITY)
+        if (this->getSize() == capacity)
             throw std::length_error("Size of bounded list exceeds capacity");
         ListWrapper<T>::pushFront(item);
+    }
+
+    T& operator[] (int id) override {
+        while (this->getSize() <= id)
+        {
+            this->pushBack(0);
+        }
+        return ListWrapper<T>::operator[](id);
     }
 };
 
