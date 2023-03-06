@@ -9,8 +9,8 @@
 Class Computer {
     private:
         RegisterFile registerFile;
-        Register PC;
-        RAM RAM;
+        Register pc;
+        RAM ram;
     public:
         Computer();
         Computer(const Computer&);
