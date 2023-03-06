@@ -75,11 +75,11 @@ public:
         return list.end();
     }
 
-    const T& operator[] (int id) const {
+    virtual const T& operator[] (int id) const {
         return list.at(id);
     }
 
-    T& operator[] (int id) {
+    virtual T& operator[] (int id) {
         return list.at(id);
     }
 };
