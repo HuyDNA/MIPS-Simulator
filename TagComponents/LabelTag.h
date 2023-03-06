@@ -5,9 +5,11 @@
 #include "Tag.h"
 #include "TagType.h"
 
-Interface LabelTag: public Tag {
+Class LabelTag: public Tag {
     public:
-        virtual TagType type() const override = 0;
+        virtual TagType type() const override {
+            return TagType::LABEL;
+        }
 };
 
 #endif
