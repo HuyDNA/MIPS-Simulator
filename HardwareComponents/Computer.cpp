@@ -2,20 +2,21 @@
 #include "Register.h"
 #include "RegisterFile.h"
 #include "RAM.h"
+#include "Computer.h"
 
 Computer::Computer() = default;
 
 Computer::Computer(const Computer& otherComputer): 
     registerFile {otherComputer.registerFile},
-    PC {otherComputer.PC},
-    RAM {otherComputer.RAM} {
+    pc {otherComputer.pc},
+    ram {otherComputer.ram} {
 
 }
 
 Computer::~Computer() = default;
 
 Register& Computer::getPC() {
-    return PC;
+    return pc;
 }
 
 Register& Computer::getRegisterOfNumber(int number) {
@@ -23,5 +24,5 @@ Register& Computer::getRegisterOfNumber(int number) {
 }
 
 RAM& Computer::getRAM() {
-    return RAM;
+    return ram;
 }
