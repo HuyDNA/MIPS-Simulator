@@ -15,7 +15,7 @@ using std::array;
 using std::string;
 using address_t = std::uint_fast32_t;
 
-Class Register {
+Class Register: public ContiguousMemoryHardware {
     public:
         static constexpr int REGISTER_SIZE_IN_BYTES = 4;
     private:
