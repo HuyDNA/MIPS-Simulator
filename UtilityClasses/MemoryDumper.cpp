@@ -1,6 +1,7 @@
-#include "MemoryDumper.h"
-#include "../MemoryUnitStructs/Byte.h"
-#include "../MemoryUnitStructs/Word.h"
+#include "UtilityClasses/MemoryDumper.h"
+
+#include "MemoryUnitStructs/Byte.h"
+#include "MemoryUnitStructs/Word.h"
 
 #include <string>
 #include <cstddef>

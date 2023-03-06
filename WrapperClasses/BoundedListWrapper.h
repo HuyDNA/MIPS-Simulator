@@ -1,9 +1,11 @@
 #ifndef _BOUNDED_LIST_WRAPPER_MIPS_SIMULATOR_
 #define _BOUNDED_LIST_WRAPPER_MIPS_SIMULATOR_
 
-#include "ListWrapper.h"
+#include "visual_class_macros.h"
+
+#include "WrapperClasses/ListWrapper.h"
+
 #include <vector>
-#include "../visual_class_macros.h"
 
 using std::vector;
 

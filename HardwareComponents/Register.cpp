@@ -1,9 +1,12 @@
-#include "../visual_class_macros.h"
-#include "ContiguousMemoryHardware.h"
-#include "Register.h"
-#include "../MemoryUnitStructs/Byte.h"
-#include "../MemoryUnitStructs/Word.h"
-#include "../UtilityClasses/MemoryDumper.h"
+#include "visual_class_macros.h"
+
+#include "HardwareComponents/ContiguousMemoryHardware.h"
+#include "HardwareComponents/Register.h"
+
+#include "MemoryUnitStructs/Byte.h"
+#include "MemoryUnitStructs/Word.h"
+
+#include "UtilityClasses/MemoryDumper.h"
 
 #include <cstdint>
 #include <string>

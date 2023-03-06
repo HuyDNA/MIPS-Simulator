@@ -1,6 +1,7 @@
-#include "../visual_class_macros.h"
-#include "Register.h"
-#include "RegisterFile.h"
+#include "visual_class_macros.h"
+
+#include "HardwareComponents/Register.h"
+#include "HardwareComponents/RegisterFile.h"
 
 #include <cstdint>
 #include <string>

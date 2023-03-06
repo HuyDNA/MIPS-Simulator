@@ -1,10 +1,10 @@
 #ifndef _RAM_MIPS_SIMULATOR_
 #define _RAM_MIPS_SIMULATOR_
 
-#include "../visual_class_macros.h"
-#include "ContiguousMemoryHardware.h"
-#include "../MemoryUnitStructs/Byte.h"
-#include "../MemoryUnitStructs/Word.h"
+#include "visual_class_macros.h"
+#include "HardwareComponents/ContiguousMemoryHardware.h"
+#include "MemoryUnitStructs/Byte.h"
+#include "MemoryUnitStructs/Word.h"
 
 #include <array>
 #include <cstdint>
