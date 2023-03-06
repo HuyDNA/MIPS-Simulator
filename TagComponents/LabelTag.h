@@ -1,9 +1,10 @@
 #ifndef _LABEL_TAG_MIPS_SIMULATOR_
 #define _LABEL_TAG_MIPS_SIMULATOR_
 
-#include "../visual_class_macros.h"
-#include "Tag.h"
-#include "TagType.h"
+#include "visual_class_macros.h"
+
+#include "TagComponents/Tag.h"
+#include "TagComponents/TagType.h"
 
 Class LabelTag: public Tag {
     public:

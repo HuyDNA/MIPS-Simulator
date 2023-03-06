@@ -1,8 +1,9 @@
-#include "../visual_class_macros.h"
-#include "Register.h"
-#include "RegisterFile.h"
-#include "RAM.h"
-#include "Computer.h"
+#include "visual_class_macros.h"
+
+#include "HardwareComponents/Register.h"
+#include "HardwareComponents/RegisterFile.h"
+#include "HardwareComponents/RAM.h"
+#include "HardwareComponents/Computer.h"
 
 Computer::Computer() = default;
 

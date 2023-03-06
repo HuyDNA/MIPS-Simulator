@@ -1,8 +1,10 @@
-#include "../visual_class_macros.h"
-#include "RAM.h"
-#include "../MemoryUnitStructs/Byte.h"
-#include "../MemoryUnitStructs/Word.h"
-#include "../UtilityClasses/MemoryDumper.h"
+#include "visual_class_macros.h"
+
+#include "HardwareComponents/RAM.h"
+#include "MemoryUnitStructs/Byte.h"
+#include "MemoryUnitStructs/Word.h"
+
+#include "UtilityClasses/MemoryDumper.h"
 
 #include <cstdint>
 #include <string>

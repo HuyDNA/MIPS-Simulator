@@ -1,7 +1,8 @@
 #ifndef _LIST_WRAPPER_MIPS_SIMULATOR_
 #define _LIST_WRAPPER_MIPS_SIMULATOR_
 
-#include "../visual_class_macros.h"
+#include "visual_class_macros.h"
+
 #include <vector>
 
 using std::vector;

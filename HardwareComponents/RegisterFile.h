@@ -1,8 +1,9 @@
 #ifndef _REGISTER_FILE_MIPS_SIMULATOR_
 #define _REGISTER_FILE_MIPS_SIMULATOR_
 
-#include "../visual_class_macros.h"
-#include "Register.h"
+#include "visual_class_macros.h"
+
+#include "HardwareComponents.Register.h"
 
 #include <cstddef>
 #include <cstdint>

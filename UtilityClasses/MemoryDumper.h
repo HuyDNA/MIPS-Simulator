@@ -1,9 +1,10 @@
 #ifndef _MEMORY_DUMPER_MIPS_SIMULATOR_
 #define _MEMORY_DUMPER_MIPS_SIMULATOR_
 
-#include "../visual_class_macros.h"
-#include "../MemoryUnitStructs/Byte.h"
-#include "../MemoryUnitStructs/Word.h"
+#include "visual_class_macros.h"
+
+#include "MemoryUnitStructs/Byte.h"
+#include "MemoryUnitStructs/Word.h"
 
 #include <string>
 

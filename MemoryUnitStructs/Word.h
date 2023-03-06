@@ -1,7 +1,7 @@
 #ifndef _WORD_MIPS_SIMULATOR_
 #define _WORD_MIPS_SIMULATOR_
 
-#include "Byte.h"
+#include "MemoryUnitStructs/Byte.h"
 
 struct Word {
     static const int WORD_SIZE_IN_BYTES = 4;
