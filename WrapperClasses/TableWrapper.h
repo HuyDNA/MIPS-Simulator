@@ -1,5 +1,5 @@
-#ifndef TABLE_WRAPPER_MIPS_SIMULATOR
-#define TABLE_WRAPPER_MIPS_SIMULATOR
+#ifndef _TABLE_WRAPPER_MIPS_SIMULATOR_
+#define _TABLE_WRAPPER_MIPS_SIMULATOR_
 
 #include "../visual_class_macros.h"
 #include <map>
