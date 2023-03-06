@@ -75,7 +75,7 @@ public:
         return list.end();
     }
 
-    virtual const T& operator[] (int id) const {
+    const T& operator[] (int id) const {
         return list.at(id);
     }
 
