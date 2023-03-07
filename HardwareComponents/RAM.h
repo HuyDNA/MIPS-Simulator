@@ -16,7 +16,7 @@ using address_t = std::uint_fast32_t;
 
 Class RAM: public ContiguousMemoryHardware {
     public:
-        static constexpr int RAM_SIZE_IN_BYTES = 4'294'967'296; // 2^32
+        static constexpr long long RAM_SIZE_IN_BYTES = 4'294'967'296; // 2^32
     private:
         array<Byte, RAM_SIZE_IN_BYTES> byteArray;
     public:
