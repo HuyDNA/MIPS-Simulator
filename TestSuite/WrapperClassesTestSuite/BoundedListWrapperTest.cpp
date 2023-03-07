@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <initializer_list>
+#include <stdexcept>
 
 using std::cout;
 
@@ -22,6 +23,23 @@ Class BoundedListWrapperTest {
         template <class E, class T>
             using MonadCallBackType = E (BoundedListWrapper<T>::*) (const T&);
     public:
+        template <int capacity = DEFAULT_CAPACITY, class T>
+        static void testNegativeCapacity() {
+            if constexpr (capacity >= 0)
+                throw std::runtime_error{"testNegativeCapacity(): Capacity should be negative here"};
+            
+            bool errorOccured = false;
+
+            try {
+                BoundedListWrapper<T> list = createEmptyList<capacity, T>();
+            } catch (const std::exception& error) {
+                std::cout << "testNegativeCapacity() detects \"" << error.what() << "\" thrown" << std::endl;
+                errorOccured = true;
+            }
+
+            Assert::equals(errorOccured, true, "testNegativeCapacity(): An error should occur here");
+        }
+
         template <int capacity = DEFAULT_CAPACITY, class T>
         static void testEmpty() {
             BoundedListWrapper<T> list = createEmptyList<capacity, T>();
@@ -88,8 +106,22 @@ Class BoundedListWrapperTest {
         }
 
         template <int capacity = DEFAULT_CAPACITY, class... Ts, class T>
-        static void testPushbackOutOfCapacity() {
+        static void testPushBackOutOfCapacity(const T& first, const Ts&... rest) {
+            checkParameterTypesAllSame<T, Ts...>();
 
+            if constexpr (capacity >= sizeof...(Ts) + 1)
+                throw std::runtime_error("testPushBackOutOfCapacity(): Capacity should be less than the number of passed-in parameter");
+            
+            bool errorOccurred = false; 
+            try {
+                createListWithElements<capacity>({first, rest...});
+            }
+            catch (const std::exception& error) {
+                std::cout << "testPushBackOutOfCapacity() detects \"" << error.what() << "\" thrown" << std::endl;
+                errorOccurred = true;
+            }
+
+            Assert::equals(errorOccurred, true, "testPushBackOutOfCapacity(): An error should occur");
         }
 
     private:
@@ -158,7 +190,11 @@ int main() {
     string three = "three";
     string four = "four";
 
-    BoundedListWrapperTest::testEmpty<4, int>();
+    //BoundedListWrapperTest::testNegativeCapacity<-2, int>();
+    //BoundedListWrapperTest::testNegativeCapacity<10, string>();
+    //BoundedListWrapperTest::testNegativeCapacity<-10, string>();
+
+    BoundedListWrapperTest::testEmpty<0, int>();
     BoundedListWrapperTest::testEmpty<4, char>();
     BoundedListWrapperTest::testEmpty<4, string>();
     BoundedListWrapperTest::testEmpty<4, float>();
@@ -185,4 +221,8 @@ int main() {
     BoundedListWrapperTest::testOnePopFront(1, 2, 3, 4, 5);
     BoundedListWrapperTest::testOnePopFront(4.0f, 2.0f, 3.9f);
     BoundedListWrapperTest::testOnePopFront(one, two, three);
+
+    BoundedListWrapperTest::testPushBackOutOfCapacity<4>(one, one, two, two, three);
+    BoundedListWrapperTest::testPushBackOutOfCapacity<3>(1, 2, 3, 4, 5);
+    BoundedListWrapperTest::testPushBackOutOfCapacity<4>(10, 23, 11, 23, 33);
 }
