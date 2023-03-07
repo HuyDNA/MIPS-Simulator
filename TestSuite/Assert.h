@@ -8,6 +8,7 @@
 #include <concepts>
 #include <cmath>
 #include <stdexcept>
+#include <iostream>
 
 using std::string;
 
@@ -38,8 +39,8 @@ Class Assert {
             assert(a != b, fail_message);
         }
     private:
-        static void assert(const bool failed, const string& fail_message) {
-            if (failed)
+        static void assert(const bool success, const string& fail_message) {
+            if (!success)
                 throw std::runtime_error(fail_message);
         }    
 };

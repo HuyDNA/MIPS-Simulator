@@ -72,7 +72,7 @@ Class ListWrapperTest {
             ListWrapper<T> list = createListWithElementsReversed({first, rest...});
             list.popBack();
 
-            assertListEqualsReverseUsingBracketIndexing(list, {first, rest...}, "testOnePopBack(): List does not equal the passed-in elements using bracket indexing");
+            assertListEqualsReverseUsingBracketIndexing(list, {rest...}, "testOnePopBack(): List does not equal the passed-in elements using bracket indexing");
         }
 
         template <class... Ts, class T>
@@ -82,7 +82,7 @@ Class ListWrapperTest {
             ListWrapper<T> list = createListWithElements({first, rest...});
             list.popFront();
 
-            assertListEqualsUsingBracketIndexing(list, {first, rest...}, "testOnePopFront(): List does not equal the passed-in elements using bracket indexing");
+            assertListEqualsUsingBracketIndexing(list, {rest...}, "testOnePopFront(): List does not equal the passed-in elements using bracket indexing");
         }
 
     private:
