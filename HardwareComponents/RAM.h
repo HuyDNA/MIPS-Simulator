@@ -16,13 +16,15 @@ using address_t = std::uint_fast32_t;
 
 Class RAM: public ContiguousMemoryHardware {
     public:
-        static constexpr int RAM_SIZE_IN_BYTES = 4'294'967'296; // 2^32
+        static constexpr long long RAM_SIZE_IN_BYTES = 4'294'967'296; // 2^32
     private:
         array<Byte, RAM_SIZE_IN_BYTES> byteArray;
     public:
         RAM();
         RAM(const RAM&);
-        virtual ~RAM();
+        virtual ~RAM() = default;
+        RAM& operator=(const RAM&) = delete;
+        RAM& operator=(RAM&&) = delete;
 
         virtual Byte get(const address_t) const override;
         virtual void set(const address_t, const Byte) override;

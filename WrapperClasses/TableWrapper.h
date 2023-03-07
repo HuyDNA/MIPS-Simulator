@@ -32,14 +32,22 @@ public:
         return table[key];
     }
 
-    auto cbegin() {
+    auto cbegin() const {
         return table.cbegin();
     }
 
-    auto cend() {
+    auto cend() const {
         return table.cend();
     }
 
+    const auto begin() const {
+        return table.begin();
+    }
+
+    const auto end() const {
+        return table.end();
+    }
+    
     auto begin() {
         return table.begin();
     }

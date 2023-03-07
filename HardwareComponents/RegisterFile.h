@@ -3,7 +3,7 @@
 
 #include "visual_class_macros.h"
 
-#include "HardwareComponents.Register.h"
+#include "HardwareComponents/Register.h"
 
 #include <cstddef>
 #include <cstdint>

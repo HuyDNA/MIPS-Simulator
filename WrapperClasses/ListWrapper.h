@@ -49,16 +49,16 @@ public:
         
     }
 
-    ListWrapper<T>(const ListWrapper<T> &wrapper) : list(wrapper.list) {
+    ListWrapper(const ListWrapper &wrapper) : list(wrapper.list) {
 
     }
 
-    ListWrapper<T>(ListWrapper<T> &&wrapper) noexcept : list(std::move(wrapper.list)) {
+    ListWrapper(ListWrapper &&wrapper) noexcept : list(std::move(wrapper.list)) {
         
     }
 
-    ListWrapper<T>& operator=(const ListWrapper &wrapper) = delete;
-    ListWrapper<T>& operator=(ListWrapper<T> &&wrapper) = delete;
+    ListWrapper& operator=(const ListWrapper &wrapper) = delete;
+    ListWrapper& operator=(ListWrapper<T> &&wrapper) = delete;
 
     auto cbegin() const {
         return list.cbegin();
@@ -66,6 +66,14 @@ public:
 
     auto cend() const {
         return list.cend();
+    }
+
+    const auto begin() const {
+        return list.begin();
+    }
+
+    const auto end() const {
+        return list.end();
     }
 
     auto begin() {

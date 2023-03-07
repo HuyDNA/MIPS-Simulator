@@ -25,7 +25,9 @@ Class Register: public ContiguousMemoryHardware {
     public:
         Register();
         Register(const Register&);
-        virtual ~Register();
+        virtual ~Register() = default;
+        Register& operator=(const Register&) = delete;
+        Register& operator=(Register&&) = delete;
 
         virtual Byte get(const address_t) const override;
         virtual void set(const address_t, const Byte) override;
