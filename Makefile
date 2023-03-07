@@ -1,10 +1,12 @@
-SHELL = /bin/bash
-.SUFFIXES = .cpp .o
+SHELL 			 = /bin/bash
+.SUFFIXES 		 = .cpp .o
 
-include_paths = ${PWD}
+source_files	:= $(shell find . -name "*.cpp" -not -path "./TestSuite/*")
+test_files		:= $(shell find "./TestSuite/" -name "*.cpp")
+include_paths 	:= ${PWD}
 
-CXX = g++
-CXXFLAGS = -I ${include_paths}
+CXX 			 = g++
+CXXFLAGS 		 = -I ${include_paths} -std=c++20
 
 .PHONY: all clean test
 
@@ -12,4 +14,9 @@ all:
 
 clean:
 
-test:
+test	:
+	for test in ${test_files}; do \
+		${CXX} ${CXXFLAGS} -o test ${source_files} $$test && ./test; \
+	done
+	
+	rm -rf test
