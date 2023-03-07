@@ -111,9 +111,9 @@ Class ListWrapperTest {
         }
 
         template <class T, class E>
-        static void forEach(const ListWrapper<T>& list, MonadCallBackType<E, T> callback, std::initializer_list<T> elemList) {
+        static void forEach(ListWrapper<T>& list, MonadCallBackType<E, T> callback, std::initializer_list<T> elemList) {
             for (const T& elem: elemList)
-                list.*callback(elem);
+                (list.*callback)(elem);
         }
 
         template <class T>
