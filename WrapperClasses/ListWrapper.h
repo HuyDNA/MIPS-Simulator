@@ -68,6 +68,14 @@ public:
         return list.cend();
     }
 
+    const auto begin() const {
+        return list.begin();
+    }
+
+    const auto end() const {
+        return list.end();
+    }
+
     auto begin() {
         return list.begin();
     }
