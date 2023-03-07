@@ -7,6 +7,7 @@
 #include <type_traits>
 #include <concepts>
 #include <cmath>
+#include <stdexcept>
 
 using std::string;
 
@@ -39,7 +40,7 @@ Class Assert {
     private:
         static void assert(const bool failed, const string& fail_message) {
             if (failed)
-                throw fail_message;
+                throw std::runtime_error(fail_message);
         }    
 };
 
