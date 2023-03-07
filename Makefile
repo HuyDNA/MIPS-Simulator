@@ -25,7 +25,7 @@ test	:
 
 	@for test in ${test_files}; do \
 		echo -e "${_magenta_}Testing $${test##*/}..."; \
-		echo -e -n "${_red_}"; \
+		echo -e -n "${_cyan_}"; \
 		${CXX} ${CXXFLAGS} -o test ${source_files} $$test && ./test; \
 		if [ "$$?" -eq 0 ]; then \
 			echo -e "${_green_}Passed all tests in $${test##*/}\n"; \
