@@ -10,33 +10,30 @@
 
 using std::string;
 
-template <class T>
-concept not_floating_point = !std::is_floating_point<T>::value;
-
 Class Assert {
     public:
-        template <class T>
-            requires not_floating_point<T>
-        static void equals(const T& a, const T& b, const string& fail_message = "Failed", double error = 1e-7) {
+        template <class T1, class T2>
+            requires (std::floating_point<T1> && std::floating_point<T2>)
+        static void equals(const T1& a, const T2& b, const string& fail_message = "Failed", double error = 1e-7) {
             assert(std::abs(a - b) < error, fail_message);
         }
 
-        template <class T>
-            requires not_floating_point<T>
-        static void unequals(const T& a, const T& b, const string& fail_message = "Failed", double error = 1e-7) {
+        template <class T1, class T2>
+            requires (std::floating_point<T1> && std::floating_point<T2>)
+        static void unequals(const T1& a, const T2& b, const string& fail_message = "Failed", double error = 1e-7) {
             assert(std::abs(a - b) >= error, fail_message);
         }
 
 
-        template <class T>
-            requires std::floating_point<T>
-        static void equals(const T& a, const T& b, const string& fail_message = "Failed") {
+        template <class T1, class T2>
+            requires (!std::floating_point<T1> && !std::floating_point<T2>)
+        static void equals(const T1& a, const T2& b, const string& fail_message = "Failed") {
             assert(a == b, fail_message);
         }
 
-        template <class T>
-            requires std::floating_point<T>
-        static void unequals(const T& a, const T& b, const string& fail_message = "Failed") {
+        template <class T1, class T2>
+            requires (!std::floating_point<T1> && !std::floating_point<T2>)
+        static void unequals(const T1& a, const T2& b, const string& fail_message = "Failed") {
             assert(a != b, fail_message);
         }
     private:
