@@ -40,14 +40,14 @@ public:
 
     virtual const T& operator[] (int id) const override {
         while (this->getSize() <= id) {
-            this->pushBack(0);
+            this->padZeroToBack();
         }
         return ListWrapper<T>::operator[](id);
     };
 
     virtual T& operator[] (int id) override {
         while (this->getSize() <= id) {
-            this->pushBack(0);
+            this->padZeroToBack();
         }
         return ListWrapper<T>::operator[](id);
     }

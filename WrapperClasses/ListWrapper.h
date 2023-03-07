@@ -91,6 +91,10 @@ public:
     virtual T& operator[] (int id) {
         return list.at(id);
     }
+protected:
+    void padZeroToBack() const {
+        list.push_back(0);
+    }
 };
 
 #endif
