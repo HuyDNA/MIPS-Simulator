@@ -30,9 +30,9 @@ test	:
 		if [ "$$?" -eq 0 ]; then \
 			echo -e "${_green_}Passed all tests in $${test##*/}\n"; \
 		else \
-			echo -e "${_red_}Failed!"; \
+			echo -e "${_red_}Failed!\n"; \
 		fi; \
 	done; \
 	echo -e "${_white_}Cleaning after tests..."; \
-	rm test; \
+	rm -rf test; \
 	echo -e "ALL DONE!"; \
