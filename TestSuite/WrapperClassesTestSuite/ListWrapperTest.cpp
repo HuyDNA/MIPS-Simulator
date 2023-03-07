@@ -9,6 +9,9 @@
 
 using std::cout;
 
+template <class T1, class T2, class... RestTs>
+constexpr bool is_all_same = std::is_same_v<T1, T2> && (sizeof...(RestTs) == 0 || is_all_same<T2, RestTs...>);
+
 /*Caveat: Can not test with a single parameter!*/
 Class ListWrapperTest {
         template <class E>
@@ -82,7 +85,7 @@ Class ListWrapperTest {
     private:
         template <class... Ts>
         static consteval void checkParameterTypesAllSame() {
-            static_assert(std::is_all_same<Ts...>, "All parameters are not of the same type. Check your tests.");
+            static_assert(is_all_same<Ts...>, "All parameters are not of the same type. Check your tests.");
         }
 
         template <class T>
