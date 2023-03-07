@@ -33,7 +33,7 @@ string MemoryDumper::getByteRepresentationInHexa(const Byte& byte) {
 }
 
 string MemoryDumper::getHalfByteRepresentationInHexa(const Byte& byte) {
-    switch (std::to_integer(byte)) {
+    switch (static_cast<int>(byte)) {
         case 0: return "0";
         case 1: return "1";
         case 2: return "2";
