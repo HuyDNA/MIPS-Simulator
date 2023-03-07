@@ -22,8 +22,6 @@ RAM::RAM(const RAM& otherRAM) {
         byteArray[address] = otherRAM.byteArray[address];
 }
 
-RAM::~RAM() = default;
-
 Byte RAM::get(const address_t address) const {
     return byteArray[address];
 }

@@ -22,7 +22,9 @@ Class RAM: public ContiguousMemoryHardware {
     public:
         RAM();
         RAM(const RAM&);
-        virtual ~RAM();
+        virtual ~RAM() = default;
+        RAM& operator=(const RAM&) = delete;
+        RAM& operator=(RAM&&) = delete;
 
         virtual Byte get(const address_t) const override;
         virtual void set(const address_t, const Byte) override;

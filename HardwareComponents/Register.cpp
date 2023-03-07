@@ -24,8 +24,6 @@ Register::Register(const Register& otherRegister) {
         byteArray[address] = otherRegister.byteArray[address];
 }
 
-Register::~Register() = default;
-
 Byte Register::get(const address_t address) const {
     return byteArray[address];
 }
