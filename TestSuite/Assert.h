@@ -18,26 +18,26 @@ Class Assert {
         template <class T>
             requires not_floating_point<T>
         static void equals(const T& a, const T& b, const string& fail_message = "Failed", double error = 1e-7) {
-            assert(std::abs(a - b) < error, failure_message);
+            assert(std::abs(a - b) < error, fail_message);
         }
 
         template <class T>
             requires not_floating_point<T>
         static void unequals(const T& a, const T& b, const string& fail_message = "Failed", double error = 1e-7) {
-            assert(std::abs(a - b) >= error, failure_message);
+            assert(std::abs(a - b) >= error, fail_message);
         }
 
 
         template <class T>
             requires std::floating_point<T>
         static void equals(const T& a, const T& b, const string& fail_message = "Failed") {
-            assert(a == b, failure_message);
+            assert(a == b, fail_message);
         }
 
         template <class T>
             requires std::floating_point<T>
         static void unequals(const T& a, const T& b, const string& fail_message = "Failed") {
-            assert(a != b, failure_message);
+            assert(a != b, fail_message);
         }
     private:
         static void assert(const bool failed, const string& fail_message) {
