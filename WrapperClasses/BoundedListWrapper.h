@@ -38,6 +38,13 @@ public:
         ListWrapper<T>::pushFront(item);
     }
 
+    virtual const T& operator[] (int id) const override {
+        while (this->getSize() <= id) {
+            this->pushBack(0);
+        }
+        return ListWrapper<T>::operator[](id);
+    };
+
     virtual T& operator[] (int id) override {
         while (this->getSize() <= id) {
             this->pushBack(0);
