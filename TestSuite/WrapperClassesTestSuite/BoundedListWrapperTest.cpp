@@ -10,12 +10,6 @@
 
 using std::cout;
 
-template <class T1, class T2, class... RestTs>
-constexpr bool is_all_same = std::is_same_v<T1, T2> && is_all_same<T2, RestTs...>;;
-
-template <class T1, class T2>
-constexpr bool is_all_same<T1, T2> = std::is_same_v<T1, T2>; 
-
 constexpr int DEFAULT_CAPACITY = 100;
 
 /*Caveat: Can not test with a single parameter!*/
@@ -49,7 +43,7 @@ Class BoundedListWrapperTest {
 
         template <int capacity = DEFAULT_CAPACITY, class... Ts, class T>
         static void testNonEmpty(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             BoundedListWrapper<T> list = createListWithElements<capacity>({first, rest...});
 
@@ -58,7 +52,7 @@ Class BoundedListWrapperTest {
 
         template <int capacity = DEFAULT_CAPACITY, class... Ts, class T>
         static void testGetSize(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             BoundedListWrapper<T> list = createListWithElements<capacity>({first, rest...});
 
@@ -67,7 +61,7 @@ Class BoundedListWrapperTest {
 
         template <int capacity = DEFAULT_CAPACITY, class... Ts, class T>
         static void testPushBack(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             BoundedListWrapper<T> list = createListWithElements<capacity>({first, rest...});
 
@@ -77,7 +71,7 @@ Class BoundedListWrapperTest {
         
         template <int capacity = DEFAULT_CAPACITY, class... Ts, class T>
         static void testPushFront(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             BoundedListWrapper<T> list = createListWithElementsReversed<capacity>({first, rest...});
 
@@ -87,7 +81,7 @@ Class BoundedListWrapperTest {
 
         template <int capacity = DEFAULT_CAPACITY, class... Ts, class T>
         static void testOnePopBack(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             BoundedListWrapper<T> list = createListWithElementsReversed<capacity>({first, rest...});
             list.popBack();
@@ -97,7 +91,7 @@ Class BoundedListWrapperTest {
 
         template <int capacity = DEFAULT_CAPACITY, class... Ts, class T>
         static void testOnePopFront(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             BoundedListWrapper<T> list = createListWithElements<capacity>({first, rest...});
             list.popFront();
@@ -107,7 +101,7 @@ Class BoundedListWrapperTest {
 
         template <int capacity = DEFAULT_CAPACITY, class... Ts, class T>
         static void testPushOutOfCapacity(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             if constexpr (capacity >= sizeof... (Ts) + 1)
                 throw std::runtime_error{"testPushOutOfCapacity(): Capacity should be less than the number of passed-in elements"};
@@ -128,7 +122,7 @@ Class BoundedListWrapperTest {
 
         template <int capacity = DEFAULT_CAPACITY, class...Ts, class T>
         static void testCopyConstructor(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             BoundedListWrapper<T> list = createListWithElements<capacity>({first, rest...});
 
@@ -144,7 +138,7 @@ Class BoundedListWrapperTest {
         
         template <int capacity = DEFAULT_CAPACITY, class...Ts, class T>
         static void testMoveConstructor(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             const string fail_list_not_same_message = "testMoveConstructor(): The moved list isn't the same as the original";
             const string fail_not_empty_message = "testMoveConstructor(): The moved-out list should be empty";
@@ -164,12 +158,7 @@ Class BoundedListWrapperTest {
             Assert::equals(list3.empty(), true, fail_not_empty_message);
         }
 
-    private:
-        template <class... Ts>
-        static consteval void checkParameterTypesAllSame() {
-            static_assert(is_all_same<Ts...>, "All parameters are not of the same type. Check your tests.");
-        }
-
+    private: 
         template <int capacity, class T>
         static BoundedListWrapper<T> createEmptyList() {
             return BoundedListWrapper<T>(capacity);
