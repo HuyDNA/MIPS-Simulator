@@ -48,5 +48,6 @@ test: precompile
 		fi; \
 	done; \
 	echo -e "${_white_}Cleaning after tests..."; \
-	rm -rf test $$(find "./TestSuite/" -type f -executable); \
-	echo -e "ALL DONE!"
+	echo -e -n "${_cyan_}"; \
+	rm -rfv test $$(find "./TestSuite/" -type f -executable); \
+	echo -e "${_green_}ALL DONE!"
