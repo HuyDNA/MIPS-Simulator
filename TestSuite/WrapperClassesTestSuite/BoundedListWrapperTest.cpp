@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <initializer_list>
+#include <stdexcept>
 
 using std::cout;
 
@@ -22,6 +23,23 @@ Class BoundedListWrapperTest {
         template <class E, class T>
             using MonadCallBackType = E (BoundedListWrapper<T>::*) (const T&);
     public:
+        template <int capacity = DEFAULT_CAPACITY, class T>
+        static void testNegativeCapacity() {
+            if constexpr (capacity >= 0)
+                throw std::runtime_error{"testNegativeCapacity(): Capacity should be negative here"};
+            
+            bool errorOccured = false;
+
+            try {
+                BoundedListWrapper<T> list = createEmptyList<capacity, T>();
+            } catch (const std::exception& error) {
+                std::cout << "testNegativeCapacity() detects \"" << error.what() << "\" thrown" << std::endl;
+                errorOccured = true;
+            }
+
+            Assert::equals(errorOccured, true, "testNegativeCapacity(): An error should occur here");
+        }
+
         template <int capacity = DEFAULT_CAPACITY, class T>
         static void testEmpty() {
             BoundedListWrapper<T> list = createEmptyList<capacity, T>();
@@ -212,7 +230,11 @@ int main() {
     string three = "three";
     string four = "four";
 
-    BoundedListWrapperTest::testEmpty<4, int>();
+    //BoundedListWrapperTest::testNegativeCapacity<-2, int>();
+    //BoundedListWrapperTest::testNegativeCapacity<10, string>();
+    //BoundedListWrapperTest::testNegativeCapacity<-10, string>();
+
+    BoundedListWrapperTest::testEmpty<0, int>();
     BoundedListWrapperTest::testEmpty<4, char>();
     BoundedListWrapperTest::testEmpty<4, string>();
     BoundedListWrapperTest::testEmpty<4, float>();
