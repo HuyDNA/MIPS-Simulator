@@ -19,7 +19,7 @@ using address_t = std::uint_fast32_t;
 /*This class assumes that the heap is not used and merged to stack*/
 Class RAM: public ContiguousMemoryHardware {
     public:
-        static constexpr long long RAM_SIZE_IN_BYTES = 0xffff'ffff; // 2^32
+        static constexpr long long RAM_SIZE_IN_BYTES = 0x1'0000'0000; // 2^32
         static constexpr long long TEXT_SEGMENT_SIZE_IN_BYTES = 0x0fc0'0000;
         static constexpr long long DATA_SEGMENT_SIZE_IN_BYTES = 0x0000'8000;
         static constexpr long long STACK_SEGMENT_SIZE_IN_BYTES = 0x6FFF'7FFC;

@@ -85,9 +85,9 @@ void RAM::setByteInDataSegment(const address_t address, const Byte value) {
 }
 
 Byte RAM::getByteInStackSegment(const address_t address) const {
-    return stackSegmentByteReversedList[DATA_SEGMENT_END_ADDRESS - address];
+    return stackSegmentByteReversedList[STACK_SEGMENT_END_ADDRESS - address];
 }
 
 void RAM::setByteInStackSegment(const address_t address, const Byte value) {
-    stackSegmentByteReversedList[DATA_SEGMENT_END_ADDRESS - address] = value;
+    stackSegmentByteReversedList[STACK_SEGMENT_END_ADDRESS - address] = value;
 }
