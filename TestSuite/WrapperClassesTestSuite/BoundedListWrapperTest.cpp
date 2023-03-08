@@ -109,14 +109,14 @@ Class BoundedListWrapperTest {
         static void testPushOutOfCapacity(const T& first, const Ts&... rest) {
             checkParameterTypesAllSame<T, Ts...>();
 
-            if constexpr (capacity >= sizeof... (Ts))
+            if constexpr (capacity >= sizeof... (Ts) + 1)
                 throw std::runtime_error{"testPushOutOfCapacity(): Capacity should be less than the number of passed-in elements"};
             
             bool errorOccured = false;
 
             try {
-                createListWithElements({first, ...rest});
-                createListWithElementsReversed({first, ...rest});
+                createListWithElements<capacity>({first, rest...});
+                createListWithElementsReversed<capacity>({first, rest...});
             }
             catch (const std::exception& e) {
                 errorOccured = true;
@@ -126,11 +126,11 @@ Class BoundedListWrapperTest {
             Assert::equals(errorOccured, true, "testPushOutOfCapacity(): An error should occur here");
         }
 
-        template <class...Ts, class T>
+        template <int capacity = DEFAULT_CAPACITY, class...Ts, class T>
         static void testCopyConstructor(const T& first, const Ts&... rest) {
             checkParameterTypesAllSame<T, Ts...>();
 
-            BoundedListWrapper<T> list = createListWithElements({first, rest...});
+            BoundedListWrapper<T> list = createListWithElements<capacity>({first, rest...});
 
             BoundedListWrapper<T> list2(list);
             BoundedListWrapper<T> list3{list};
@@ -142,14 +142,14 @@ Class BoundedListWrapperTest {
             assertListEqualsUsingForEach(list4, {first, rest...}, fail_message);
         }
         
-        template <class...Ts, class T>
+        template <int capacity = DEFAULT_CAPACITY, class...Ts, class T>
         static void testMoveConstructor(const T& first, const Ts&... rest) {
             checkParameterTypesAllSame<T, Ts...>();
 
             const string fail_list_not_same_message = "testMoveConstructor(): The moved list isn't the same as the original";
             const string fail_not_empty_message = "testMoveConstructor(): The moved-out list should be empty";
             
-            BoundedListWrapper<T> list = createListWithElements({first, rest...});
+            BoundedListWrapper<T> list = createListWithElements<capacity>({first, rest...});
 
             BoundedListWrapper<T> list2(std::move(list));
             assertListEqualsUsingForEach(list2, {first, rest...}, fail_list_not_same_message);
@@ -262,7 +262,7 @@ int main() {
     BoundedListWrapperTest::testOnePopFront(4.0f, 2.0f, 3.9f);
     BoundedListWrapperTest::testOnePopFront(one, two, three);
 
-    BoundedListWrapperTest::testPushOutOfCapacity<4>(1, 2, 3, 4);
+    BoundedListWrapperTest::testPushOutOfCapacity<3>(1, 2, 3, 4);
     BoundedListWrapperTest::testPushOutOfCapacity<4>(one, two, three, four, one);
     BoundedListWrapperTest::testPushOutOfCapacity<3>(2.4f, 2.0f, 3.0f, 4.0f);
 
