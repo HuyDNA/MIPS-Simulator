@@ -1,5 +1,5 @@
-SHELL 			 = /bin/bash
-.SUFFIXES 		 = .cpp .o
+SHELL 			:= /bin/bash
+.SUFFIXES 		:= .cpp .o
 
 program_name	:= MIPS_Simulator
 precompile_cache:= .cached
@@ -8,8 +8,8 @@ header_files	:= $(shell find . -type f -name "*.h" -not -path "./TestSuite/*")
 test_files 		:= $(shell find "./TestSuite" -name "*.cpp")
 include_paths 	:= ${PWD}
 
-CXX 			 = g++
-CXXFLAGS 		 = -I ${include_paths} -std=c++20
+CXX 			:= g++
+CXXFLAGS 		:= -I ${include_paths} -std=c++20
 
 _red_			:= \e[31m
 _magenta_		:= \e[35m
@@ -21,16 +21,19 @@ _cyan_			:= \e[36m
 
 all:
 
+%.o: %.cpp
+	${CXX} ${CXXFLAGS}
+
 precompile: .cached
 
 .cached: ${source_files} ${header_files}
-	@echo -e "${_magenta_}Precompiling..."; \
+	@echo -e "${_white_}Precompiling..."; \
 		echo -e -n "${_cyan_}"; \
 		ls ${precompile_cache} > /dev/null 2>&1 || mkdir ${precompile_cache}; \
 		cd ${precompile_cache} && ${CXX} ${CXXFLAGS} -c $(patsubst ./%,../%,${source_files})
 
 clean:
-	@echo -e "${_magenta_}Cleaning..."
+	@echo -e "${_white_}Cleaning..."
 	@rm -rf .cached ${program_name}
 
 test: precompile
@@ -48,5 +51,6 @@ test: precompile
 		fi; \
 	done; \
 	echo -e "${_white_}Cleaning after tests..."; \
-	rm -rf test $$(find "./TestSuite/" -type f -executable); \
-	echo -e "ALL DONE!"
+	echo -e -n "${_cyan_}"; \
+	rm -rfv test $$(find "./TestSuite/" -type f -executable); \
+	echo -e "${_white_}ALL DONE!"
