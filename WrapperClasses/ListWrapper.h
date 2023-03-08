@@ -93,7 +93,7 @@ public:
     }
 protected:
     void padZeroToBack() const {
-        list.push_back(0);
+        list.push_back((T)0);
     }
 };
 
