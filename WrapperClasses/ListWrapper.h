@@ -10,7 +10,7 @@ using std::vector;
 template<class T>
 Class ListWrapper {
 private:
-    vector<T> list;
+    mutable vector<T> list;
 public:
     virtual void pushBack(const T& item) {
         list.push_back(item);
@@ -84,12 +84,16 @@ public:
         return list.end();
     }
 
-    const T& operator[] (int id) const {
+    virtual const T& operator[] (int id) const {
         return list.at(id);
     }
 
     virtual T& operator[] (int id) {
         return list.at(id);
+    }
+protected:
+    void padZeroToBack() const {
+        list.push_back(0);
     }
 };
 

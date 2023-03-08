@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <initializer_list>
+#include <memory>
 
 using std::cout;
 
@@ -85,6 +86,43 @@ Class ListWrapperTest {
             assertListEqualsUsingBracketIndexing(list, {rest...}, "testOnePopFront(): List does not equal the passed-in elements using bracket indexing");
         }
 
+        template <class...Ts, class T>
+        static void testCopyConstructor(const T& first, const Ts&... rest) {
+            checkParameterTypesAllSame<T, Ts...>();
+
+            ListWrapper<T> list = createListWithElements({first, rest...});
+
+            ListWrapper<T> list2(list);
+            ListWrapper<T> list3{list};
+            ListWrapper<T> list4 = list;
+
+            const string fail_message = "testCopyConstructor(): The copied list isn't the same as the original";
+            assertListEqualsUsingForEach(list2, {first, rest...}, fail_message);
+            assertListEqualsUsingBracketIndexing(list3, {first, rest...}, fail_message);
+            assertListEqualsUsingForEach(list4, {first, rest...}, fail_message);
+        }
+        
+        template <class...Ts, class T>
+        static void testMoveConstructor(const T& first, const Ts&... rest) {
+            checkParameterTypesAllSame<T, Ts...>();
+
+            const string fail_list_not_same_message = "testMoveConstructor(): The moved list isn't the same as the original";
+            const string fail_not_empty_message = "testMoveConstructor(): The moved-out list should be empty";
+            
+            ListWrapper<T> list = createListWithElements({first, rest...});
+
+            ListWrapper<T> list2(std::move(list));
+            assertListEqualsUsingForEach(list2, {first, rest...}, fail_list_not_same_message);
+            Assert::equals(list.empty(), true, fail_not_empty_message);
+
+            ListWrapper<T> list3{std::move(list2)};
+            assertListEqualsUsingForEach(list3, {first, rest...}, fail_list_not_same_message);
+            Assert::equals(list2.empty(), true, fail_not_empty_message);
+
+            ListWrapper<T> list4 = std::move(list3);
+            assertListEqualsUsingBracketIndexing(list4, {first, rest...}, fail_list_not_same_message);
+            Assert::equals(list3.empty(), true, fail_not_empty_message);
+        }
     private:
         template <class... Ts>
         static consteval void checkParameterTypesAllSame() {
@@ -178,4 +216,10 @@ int main() {
     ListWrapperTest::testOnePopFront(1, 2, 3, 4, 5);
     ListWrapperTest::testOnePopFront(4.0f, 2.0f, 3.9f);
     ListWrapperTest::testOnePopFront(one, two, three);
+
+    ListWrapperTest::testCopyConstructor(1, 2, 3, 4, 5);
+    ListWrapperTest::testCopyConstructor(one, one, one);
+
+    ListWrapperTest::testMoveConstructor(1, 2, 3, 4, 5);
+    ListWrapperTest::testMoveConstructor(one, one, one);
 }

@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <initializer_list>
+#include <stdexcept>
 
 using std::cout;
 
@@ -22,6 +23,23 @@ Class BoundedListWrapperTest {
         template <class E, class T>
             using MonadCallBackType = E (BoundedListWrapper<T>::*) (const T&);
     public:
+        template <int capacity = DEFAULT_CAPACITY, class T>
+        static void testNegativeCapacity() {
+            if constexpr (capacity >= 0)
+                throw std::runtime_error{"testNegativeCapacity(): Capacity should be negative here"};
+            
+            bool errorOccured = false;
+
+            try {
+                BoundedListWrapper<T> list = createEmptyList<capacity, T>();
+            } catch (const std::exception& error) {
+                std::cout << "testNegativeCapacity() detects \"" << error.what() << "\" thrown" << std::endl;
+                errorOccured = true;
+            }
+
+            Assert::equals(errorOccured, true, "testNegativeCapacity(): An error should occur here");
+        }
+
         template <int capacity = DEFAULT_CAPACITY, class T>
         static void testEmpty() {
             BoundedListWrapper<T> list = createEmptyList<capacity, T>();
@@ -88,8 +106,62 @@ Class BoundedListWrapperTest {
         }
 
         template <int capacity = DEFAULT_CAPACITY, class... Ts, class T>
-        static void testPushbackOutOfCapacity() {
+        static void testPushOutOfCapacity(const T& first, const Ts&... rest) {
+            checkParameterTypesAllSame<T, Ts...>();
 
+            if constexpr (capacity >= sizeof... (Ts) + 1)
+                throw std::runtime_error{"testPushOutOfCapacity(): Capacity should be less than the number of passed-in elements"};
+            
+            bool errorOccured = false;
+
+            try {
+                createListWithElements<capacity>({first, rest...});
+                createListWithElementsReversed<capacity>({first, rest...});
+            }
+            catch (const std::exception& e) {
+                errorOccured = true;
+                std::cout << "testPushOutOfCapacity(): \"" << e.what() << "\"" << std::endl;
+            }
+
+            Assert::equals(errorOccured, true, "testPushOutOfCapacity(): An error should occur here");
+        }
+
+        template <int capacity = DEFAULT_CAPACITY, class...Ts, class T>
+        static void testCopyConstructor(const T& first, const Ts&... rest) {
+            checkParameterTypesAllSame<T, Ts...>();
+
+            BoundedListWrapper<T> list = createListWithElements<capacity>({first, rest...});
+
+            BoundedListWrapper<T> list2(list);
+            BoundedListWrapper<T> list3{list};
+            BoundedListWrapper<T> list4 = list;
+
+            const string fail_message = "testCopyConstructor(): The copied list isn't the same as the original";
+            assertListEqualsUsingForEach(list2, {first, rest...}, fail_message);
+            assertListEqualsUsingBracketIndexing(list3, {first, rest...}, fail_message);
+            assertListEqualsUsingForEach(list4, {first, rest...}, fail_message);
+        }
+        
+        template <int capacity = DEFAULT_CAPACITY, class...Ts, class T>
+        static void testMoveConstructor(const T& first, const Ts&... rest) {
+            checkParameterTypesAllSame<T, Ts...>();
+
+            const string fail_list_not_same_message = "testMoveConstructor(): The moved list isn't the same as the original";
+            const string fail_not_empty_message = "testMoveConstructor(): The moved-out list should be empty";
+            
+            BoundedListWrapper<T> list = createListWithElements<capacity>({first, rest...});
+
+            BoundedListWrapper<T> list2(std::move(list));
+            assertListEqualsUsingForEach(list2, {first, rest...}, fail_list_not_same_message);
+            Assert::equals(list.empty(), true, fail_not_empty_message);
+
+            BoundedListWrapper<T> list3{std::move(list2)};
+            assertListEqualsUsingForEach(list3, {first, rest...}, fail_list_not_same_message);
+            Assert::equals(list2.empty(), true, fail_not_empty_message);
+
+            BoundedListWrapper<T> list4 = std::move(list3);
+            assertListEqualsUsingBracketIndexing(list4, {first, rest...}, fail_list_not_same_message);
+            Assert::equals(list3.empty(), true, fail_not_empty_message);
         }
 
     private:
@@ -158,7 +230,11 @@ int main() {
     string three = "three";
     string four = "four";
 
-    BoundedListWrapperTest::testEmpty<4, int>();
+    //BoundedListWrapperTest::testNegativeCapacity<-2, int>();
+    //BoundedListWrapperTest::testNegativeCapacity<10, string>();
+    //BoundedListWrapperTest::testNegativeCapacity<-10, string>();
+
+    BoundedListWrapperTest::testEmpty<0, int>();
     BoundedListWrapperTest::testEmpty<4, char>();
     BoundedListWrapperTest::testEmpty<4, string>();
     BoundedListWrapperTest::testEmpty<4, float>();
@@ -185,4 +261,14 @@ int main() {
     BoundedListWrapperTest::testOnePopFront(1, 2, 3, 4, 5);
     BoundedListWrapperTest::testOnePopFront(4.0f, 2.0f, 3.9f);
     BoundedListWrapperTest::testOnePopFront(one, two, three);
+
+    BoundedListWrapperTest::testPushOutOfCapacity<3>(1, 2, 3, 4);
+    BoundedListWrapperTest::testPushOutOfCapacity<4>(one, two, three, four, one);
+    BoundedListWrapperTest::testPushOutOfCapacity<3>(2.4f, 2.0f, 3.0f, 4.0f);
+
+    BoundedListWrapperTest::testCopyConstructor(1, 2, 3, 4, 5);
+    BoundedListWrapperTest::testCopyConstructor(one, one, one);
+
+    BoundedListWrapperTest::testMoveConstructor(1, 2, 3, 4, 5);
+    BoundedListWrapperTest::testMoveConstructor(one, one, one);
 }
