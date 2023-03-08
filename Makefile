@@ -41,7 +41,6 @@ test: precompile
 
 	@for test in ${test_files}; do \
 		echo -e "${_magenta_}Testing $${test##*/}..."; \
-		make -s $${test%.*}; \
 		echo -e -n "${_cyan_}"; \
 		${CXX} ${CXXFLAGS} -o test ${precompile_cache}/* $$test && ./test; \
 		if [ "$$?" -eq 0 ]; then \
