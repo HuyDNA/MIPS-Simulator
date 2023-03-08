@@ -6,6 +6,7 @@
 #include "WrapperClasses/ListWrapper.h"
 
 #include <vector>
+#include <stdexcept>
 
 using std::vector;
 

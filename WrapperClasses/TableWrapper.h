@@ -4,6 +4,7 @@
 #include "visual_class_macros.h"
 
 #include <map>
+#include <stdexcept>
 
 using std::map;
 
