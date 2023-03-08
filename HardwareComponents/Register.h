@@ -31,6 +31,8 @@ Class Register: public ContiguousMemoryHardware {
 
         virtual Byte get(const address_t) const override;
         virtual void set(const address_t, const Byte) override;
+
+        /*format: 0x--------*/
         string getHexaRepresentation() const;
     private:
         Word getRegisterAsWord() const;
