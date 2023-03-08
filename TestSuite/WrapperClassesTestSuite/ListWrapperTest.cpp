@@ -6,15 +6,8 @@
 
 #include <iostream>
 #include <initializer_list>
-#include <memory>
 
 using std::cout;
-
-template <class T1, class T2, class... RestTs>
-constexpr bool is_all_same = std::is_same_v<T1, T2> && is_all_same<T2, RestTs...>;;
-
-template <class T1, class T2>
-constexpr bool is_all_same<T1, T2> = std::is_same_v<T1, T2>; 
 
 /*Caveat: Can not test with a single parameter!*/
 Class ListWrapperTest {
@@ -30,7 +23,7 @@ Class ListWrapperTest {
 
         template <class... Ts, class T>
         static void testNonEmpty(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             ListWrapper<T> list = createListWithElements({first, rest...});
 
@@ -39,7 +32,7 @@ Class ListWrapperTest {
 
         template <class... Ts, class T>
         static void testGetSize(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             ListWrapper<T> list = createListWithElements({first, rest...});
 
@@ -48,7 +41,7 @@ Class ListWrapperTest {
 
         template <class... Ts, class T>
         static void testPushBack(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             ListWrapper<T> list = createListWithElements({first, rest...});
 
@@ -58,7 +51,7 @@ Class ListWrapperTest {
         
         template <class... Ts, class T>
         static void testPushFront(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             ListWrapper<T> list = createListWithElementsReversed({first, rest...});
 
@@ -68,7 +61,7 @@ Class ListWrapperTest {
 
         template <class... Ts, class T>
         static void testOnePopBack(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             ListWrapper<T> list = createListWithElementsReversed({first, rest...});
             list.popBack();
@@ -78,7 +71,7 @@ Class ListWrapperTest {
 
         template <class... Ts, class T>
         static void testOnePopFront(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             ListWrapper<T> list = createListWithElements({first, rest...});
             list.popFront();
@@ -88,7 +81,7 @@ Class ListWrapperTest {
 
         template <class...Ts, class T>
         static void testCopyConstructor(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             ListWrapper<T> list = createListWithElements({first, rest...});
 
@@ -104,7 +97,7 @@ Class ListWrapperTest {
         
         template <class...Ts, class T>
         static void testMoveConstructor(const T& first, const Ts&... rest) {
-            checkParameterTypesAllSame<T, Ts...>();
+            Assert::parameterTypesAllSame<T, Ts...>();
 
             const string fail_list_not_same_message = "testMoveConstructor(): The moved list isn't the same as the original";
             const string fail_not_empty_message = "testMoveConstructor(): The moved-out list should be empty";
@@ -124,11 +117,6 @@ Class ListWrapperTest {
             Assert::equals(list3.empty(), true, fail_not_empty_message);
         }
     private:
-        template <class... Ts>
-        static consteval void checkParameterTypesAllSame() {
-            static_assert(is_all_same<Ts...>, "All parameters are not of the same type. Check your tests.");
-        }
-
         template <class T>
         static ListWrapper<T> createEmptyList() {
             return ListWrapper<T>();
