@@ -71,15 +71,11 @@ public:
     TableWrapper& operator=(const TableWrapper &tableWrapper) = delete;
     TableWrapper& operator=(TableWrapper &&tableWrapper) = delete;
 
-    int count(const K& key) const {
-        return table.count(key);
-    }
-
     void erase(const K& key) {
         table.erase(key);
     }
 
-    int size() const {
+    int getSize() const {
         return table.size();
     }
 
