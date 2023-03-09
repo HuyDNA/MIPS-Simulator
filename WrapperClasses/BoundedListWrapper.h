@@ -27,6 +27,8 @@ public:
         
     }
 
+    virtual ~BoundedListWrapper() = default;
+
     void pushBack(const T &item) override {
         if (this->getSize() == capacity)
             throw std::length_error("Size of bounded list exceeds capacity");

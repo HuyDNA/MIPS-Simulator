@@ -57,6 +57,8 @@ public:
         
     }
 
+    virtual ~ListWrapper() = default;
+
     ListWrapper& operator=(const ListWrapper &wrapper) = delete;
     ListWrapper& operator=(ListWrapper<T> &&wrapper) = delete;
 
