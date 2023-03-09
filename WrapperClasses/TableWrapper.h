@@ -69,6 +69,8 @@ public:
 
     }
 
+    virtual ~TableWrapper() = default;
+
     TableWrapper& operator=(const TableWrapper &tableWrapper) = delete;
     TableWrapper& operator=(TableWrapper &&tableWrapper) = delete;
 
