@@ -6,6 +6,7 @@
 #include "TagComponents/TextTag.h"
 
 #include <string>
+#include <memory>
 
 using std::string;
 
@@ -19,5 +20,7 @@ Class InstructionTag: public TextTag {
             return TagType::INSTRUCTION;
         }
 };
+
+using InstructionTagPointer = std::shared_ptr<InstructionTag>;
 
 #endif

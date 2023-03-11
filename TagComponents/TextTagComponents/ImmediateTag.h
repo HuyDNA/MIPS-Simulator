@@ -6,6 +6,8 @@
 #include "TagComponents/TagType.h"
 #include "TagComponents/TextTag.h"
 
+#include <memory>
+
 Class ImmediateTag: public TextTag {
     public:
         ImmediateTag(long long value): value { value } {
@@ -16,5 +18,7 @@ Class ImmediateTag: public TextTag {
             return TagType::IMMEDIATE;
         }
 };
+
+using ImmediateTagPointer = std::shared_ptr<ImmediateTag>;
 
 #endif

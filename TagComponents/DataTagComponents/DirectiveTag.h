@@ -7,6 +7,7 @@
 #include "TagComponents/DataTag.h"
 
 #include <string>
+#include <memory>
 
 using std::string;
 
@@ -20,5 +21,7 @@ Class DirectiveTag: public DataTag {
             return TagType::DIRECTIVE;
         }
 };
+
+using DirectiveTagPointer = std::shared_ptr<DirectiveTag>;
 
 #endif

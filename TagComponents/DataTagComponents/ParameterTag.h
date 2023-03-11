@@ -5,9 +5,13 @@
 #include "TagComponents/TagType.h"
 #include "TagComponents/DataTag.h"
 
+#include <memory>
+
 Interface ParameterTag: public DataTag {
     public:
         virtual TagType type() const override = 0;
 };
+
+using ParameterTagPointer = std::shared_ptr<ParameterTag>;
 
 #endif

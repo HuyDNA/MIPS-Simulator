@@ -25,4 +25,6 @@ Class ByteTag: public ParameterTag {
         }
 };
 
+using ByteTagPointer = std::shared_ptr<ByteTag>;
+
 #endif

@@ -23,4 +23,5 @@ Class IntegerTag: public ParameterTag {
         }
 };
 
+using IntegerTagPointer = std::shared_ptr<IntegerTag>;
 #endif

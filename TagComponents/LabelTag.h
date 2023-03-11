@@ -7,6 +7,7 @@
 #include "TagComponents/TagType.h"
 
 #include <string>
+#include <memory>
 
 using std::string;
 
@@ -20,5 +21,7 @@ Class LabelTag: public Tag {
             return TagType::LABEL;
         }
 };
+
+using LabelTagPointer = std::shared_ptr<LabelTag>;
 
 #endif

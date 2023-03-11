@@ -6,6 +6,8 @@
 #include "TagComponents/TagType.h"
 #include "TagComponents/TextTag.h"
 
+#include <memory>
+
 Class RegisterTag: public TextTag {
     public:
         RegisterTag(int value): value { value } {
@@ -16,5 +18,7 @@ Class RegisterTag: public TextTag {
             return TagType::REGISTER;
         }
 };
+
+using RegisterTagPointer = std::shared_ptr<RegisterTag>;
 
 #endif
