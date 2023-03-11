@@ -7,9 +7,17 @@
 #include "TagComponents/DataTagComponents/ParameterTag.h"
 #include "WrapperClasses/ListWrapper.h"
 
+#include <memory>
+
 Class IntegerTag: public ParameterTag {
     public:
-        const ListWrapper<int> value;
+        IntegerTag(const ListWrapper<long long>& value): value { value } {
+
+        }
+        IntegerTag(ListWrapper<long long>&& value): value { std::move(value) } {
+
+        }
+        const ListWrapper<long long> value;
         virtual TagType type() const override {
             return TagType::INTEGER;
         }

@@ -11,6 +11,9 @@ using std::string;
 
 Class InstructionTag: public TextTag {
     public:
+        InstructionTag(const string& value): value { value } {
+
+        }
         const string value;
         virtual TagType type() const override {
             return TagType::INSTRUCTION;
