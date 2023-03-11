@@ -6,15 +6,21 @@
 #include "TagComponents/TextTag.h"
 
 #include <string>
+#include <memory>
 
 using std::string;
 
 Class InstructionTag: public TextTag {
     public:
+        InstructionTag(const string& value): value { value } {
+
+        }
         const string value;
         virtual TagType type() const override {
             return TagType::INSTRUCTION;
         }
 };
+
+using InstructionTagPointer = std::shared_ptr<InstructionTag>;
 
 #endif

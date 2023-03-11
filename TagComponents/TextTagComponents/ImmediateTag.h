@@ -6,12 +6,19 @@
 #include "TagComponents/TagType.h"
 #include "TagComponents/TextTag.h"
 
+#include <memory>
+
 Class ImmediateTag: public TextTag {
     public:
-        const int value;
+        ImmediateTag(long long value): value { value } {
+
+        }
+        const long long value;
         virtual TagType type() const override {
             return TagType::IMMEDIATE;
         }
 };
+
+using ImmediateTagPointer = std::shared_ptr<ImmediateTag>;
 
 #endif

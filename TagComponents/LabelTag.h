@@ -6,11 +6,22 @@
 #include "TagComponents/Tag.h"
 #include "TagComponents/TagType.h"
 
+#include <string>
+#include <memory>
+
+using std::string;
+
 Class LabelTag: public Tag {
     public:
+        LabelTag(const string& value): value { value } {
+            
+        }
+        const string value;
         virtual TagType type() const override {
             return TagType::LABEL;
         }
 };
+
+using LabelTagPointer = std::shared_ptr<LabelTag>;
 
 #endif
