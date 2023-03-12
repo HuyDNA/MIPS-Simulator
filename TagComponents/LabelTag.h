@@ -5,9 +5,16 @@
 
 #include "TagComponents/Tag.h"
 #include "TagComponents/TagType.h"
+#include <string>
+
+using std::string;
 
 Class LabelTag: public Tag {
     public:
+        const string value;
+        LabelTag (string value) : value(value) {
+            
+        }
         virtual TagType type() const override {
             return TagType::LABEL;
         }

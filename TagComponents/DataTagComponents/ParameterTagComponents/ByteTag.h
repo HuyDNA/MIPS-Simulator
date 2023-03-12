@@ -12,6 +12,9 @@
 Class ByteTag: public ParameterTag {
     public:
         const ListWrapper<Byte> value;
+        ByteTag (const ListWrapper<Byte> &value) : value(value) {
+            
+        }
         virtual TagType type() const override {
             return TagType::BYTE;
         }

@@ -9,6 +9,9 @@
 Class ImmediateTag: public TextTag {
     public:
         const int value;
+        ImmediateTag(int value) : value(value) {
+            
+        }
         virtual TagType type() const override {
             return TagType::IMMEDIATE;
         }

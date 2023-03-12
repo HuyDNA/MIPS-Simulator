@@ -9,6 +9,9 @@
 Class RegisterTag: public TextTag {
     public:
         const int value;
+        RegisterTag (int value) : value(value) {
+            
+        }
         virtual TagType type() const override {
             return TagType::REGISTER;
         }

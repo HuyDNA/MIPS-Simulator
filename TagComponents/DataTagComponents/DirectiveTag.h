@@ -13,6 +13,9 @@ using std::string;
 Class DirectiveTag: public DataTag {
     public:
         const string value;
+        DirectiveTag (string value) : value(value) {
+            
+        }
         virtual TagType type() const override {
             return TagType::DIRECTIVE;
         }

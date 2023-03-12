@@ -10,6 +10,9 @@
 Class IntegerTag: public ParameterTag {
     public:
         const ListWrapper<int> value;
+        IntegerTag (const ListWrapper<int> &value) : value(value) {
+            
+        }
         virtual TagType type() const override {
             return TagType::INTEGER;
         }
