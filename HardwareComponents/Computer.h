@@ -8,8 +8,8 @@
 
 Class Computer {
     private:
-        RegisterFile registerFile;
-        Register pc;
+        RegisterFile registerFile, floatingPointRegisterFile;
+        Register pc, lo, hi;
         RAM ram;
     public:
         Computer();
